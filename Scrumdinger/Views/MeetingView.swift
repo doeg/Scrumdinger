@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MeetingView: View {
     @Binding var scrum: DailyScrum
@@ -13,8 +14,21 @@ struct MeetingView: View {
     // Wrapping a property as a @StateObject means MeetingView owns
     // the source of truth for the object. @StateObject ties the
     // ScrumTimer, which is an ObservableObject, to the MeetingView
-    // life cycle.
+    // life cycle. In other words, wrapping a reference type property
+    // as a @StateObject keeps the object alive for the life cycle
+    // of the view.
     @StateObject var scrumTimer = ScrumTimer()
+
+    // This is a computed var; it is equivalent to:
+    //
+    //      private var player: AVPlayer {
+    //          get {
+    //              return AVPlayer.sharedDingPlayer
+    //          }
+    //         }
+    private var player: AVPlayer {
+        AVPlayer.sharedDingPlayer
+    }
     
     var body: some View {
         ZStack{
@@ -52,6 +66,14 @@ struct MeetingView: View {
                 lengthInMinutes: scrum.lengthInMinutes,
                 attendees: scrum.attendees
             )
+            
+            scrumTimer.speakerChangedAction = {
+                // Seeking to time .zero ensures that the audio file
+                // always plays from the beginning.
+                player.seek(to: .zero)
+                player.play()
+            }
+            
             scrumTimer.startScrum()
         })
         .onDisappear(perform: {
