@@ -59,28 +59,41 @@ struct MeetingView: View {
         .foregroundColor(scrum.theme.accentColor)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: {
-            // Reset the ScrumTimer each time an instance of
-            // MeetingView shows on screen, indicating that
-            // a meeting should begin.
-            scrumTimer.reset(
-                lengthInMinutes: scrum.lengthInMinutes,
-                attendees: scrum.attendees
-            )
-            
-            scrumTimer.speakerChangedAction = {
-                // Seeking to time .zero ensures that the audio file
-                // always plays from the beginning.
-                player.seek(to: .zero)
-                player.play()
-            }
-            
-            scrumTimer.startScrum()
+            startScrum()
         })
         .onDisappear(perform: {
-            // Stop the ScrumTimer each time an instance of MeetingView
-            // leaves the screen, indicating that a meeting has ended.
-            scrumTimer.stopScrum()
+            endScrum()
         })
+    }
+    
+    private func startScrum() {
+        // Reset the ScrumTimer each time an instance of
+        // MeetingView shows on screen, indicating that
+        // a meeting should begin.
+        scrumTimer.reset(
+            lengthInMinutes: scrum.lengthInMinutes,
+            attendees: scrum.attendees
+        )
+        
+        scrumTimer.speakerChangedAction = {
+            // Seeking to time .zero ensures that the audio file
+            // always plays from the beginning.
+            player.seek(to: .zero)
+            player.play()
+        }
+        
+        scrumTimer.startScrum()
+    }
+    
+    private func endScrum() {
+        // Stop the ScrumTimer each time an instance of MeetingView
+        // leaves the screen, indicating that a meeting has ended.
+        scrumTimer.stopScrum()
+        
+        scrum.history.insert(
+            History(attendees: scrum.attendees),
+            at: 0
+        )
     }
 }
 

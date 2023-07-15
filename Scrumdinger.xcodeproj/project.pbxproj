@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F22528D2A62B59600EA7DDF /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F22528C2A62B59600EA7DDF /* History.swift */; };
 		4F2984C22A5F5CFF00C17E83 /* MeetingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2984C12A5F5CFF00C17E83 /* MeetingHeaderView.swift */; };
 		4F2984C42A5F5E8C00C17E83 /* ScrumProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2984C32A5F5E8C00C17E83 /* ScrumProgressViewStyle.swift */; };
 		4F2984C62A5F60A600C17E83 /* ScrumTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2984C52A5F60A600C17E83 /* ScrumTimer.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F22528C2A62B59600EA7DDF /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		4F2984C12A5F5CFF00C17E83 /* MeetingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingHeaderView.swift; sourceTree = "<group>"; };
 		4F2984C32A5F5E8C00C17E83 /* ScrumProgressViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrumProgressViewStyle.swift; path = ../../../../Downloads/ManagingStateAndLifeCycle/StartingProject/Scrumdinger/Views/ScrumProgressViewStyle.swift; sourceTree = "<group>"; };
 		4F2984C52A5F60A600C17E83 /* ScrumTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrumTimer.swift; path = ../../../../Downloads/ManagingStateAndLifeCycle/StartingProject/Scrumdinger/Models/ScrumTimer.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				4F2984C72A5F60AA00C17E83 /* AVPlayer+Ding.swift */,
 				4FE657F82A5D9C3C00033DC0 /* Theme.swift */,
 				4FE657FA2A5D9CF900033DC0 /* DailyScrum.swift */,
+				4F22528C2A62B59600EA7DDF /* History.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F22528D2A62B59600EA7DDF /* History.swift in Sources */,
 				4FE6580B2A5F22D300033DC0 /* ThemePicker.swift in Sources */,
 				4F2984C42A5F5E8C00C17E83 /* ScrumProgressViewStyle.swift in Sources */,
 				4F2984C62A5F60A600C17E83 /* ScrumTimer.swift in Sources */,
