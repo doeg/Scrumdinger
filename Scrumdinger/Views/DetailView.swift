@@ -49,9 +49,11 @@ struct DetailView: View {
                 }
                 
                 ForEach(scrum.history) { pastScrum in
-                    HStack {
-                        Image(systemName: "calendar")
-                        Text(pastScrum.date, style: .date)
+                    NavigationLink(destination: HistoryView(history: pastScrum)) {
+                        HStack {
+                            Image(systemName: "calendar")
+                            Text(pastScrum.date, style: .date)
+                        }
                     }
                 }
             }

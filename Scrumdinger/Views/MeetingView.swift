@@ -10,6 +10,8 @@ import AVFoundation
 
 struct MeetingView: View {
     @Binding var scrum: DailyScrum
+
+    @State private var isRecording = false
     
     // Wrapping a property as a @StateObject means MeetingView owns
     // the source of truth for the object. @StateObject ties the
@@ -18,6 +20,10 @@ struct MeetingView: View {
     // as a @StateObject keeps the object alive for the life cycle
     // of the view.
     @StateObject var scrumTimer = ScrumTimer()
+
+    // SpeechRecognizer's initializer requests access to the speech recognizer
+    // and microphone the first time that the system calls the object.
+    @StateObject var speechRecognizer = SpeechRecognizer()
 
     // This is a computed var; it is equivalent to:
     //
@@ -43,6 +49,7 @@ struct MeetingView: View {
                 )
 
                 MeetingTimerView(
+                    isRecording: isRecording,
                     speakers: scrumTimer.speakers,
                     theme: scrum.theme
                 )
@@ -83,6 +90,11 @@ struct MeetingView: View {
             player.seek(to: .zero)
             player.play()
         }
+
+        speechRecognizer.resetTranscript()
+        speechRecognizer.startTranscribing()
+
+        isRecording = true
         
         scrumTimer.startScrum()
     }
@@ -91,9 +103,16 @@ struct MeetingView: View {
         // Stop the ScrumTimer each time an instance of MeetingView
         // leaves the screen, indicating that a meeting has ended.
         scrumTimer.stopScrum()
+
+        speechRecognizer.stopTranscribing()
+
+        isRecording = false 
         
         scrum.history.insert(
-            History(attendees: scrum.attendees),
+            History(
+                attendees: scrum.attendees,
+                transcript: speechRecognizer.transcript
+            ),
             at: 0
         )
     }
