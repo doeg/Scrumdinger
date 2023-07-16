@@ -41,10 +41,12 @@ struct MeetingView: View {
                     secondsRemaining: scrumTimer.secondsRemaining,
                     theme: scrum.theme
                 )
-                
-                Circle()
-                    .strokeBorder(lineWidth: 24)
-                
+
+                MeetingTimerView(
+                    speakers: scrumTimer.speakers,
+                    theme: scrum.theme
+                )
+
                 HStack {
                     Text("Speaker 1 of 3")
                     Spacer()
